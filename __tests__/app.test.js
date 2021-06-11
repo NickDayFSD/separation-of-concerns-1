@@ -66,9 +66,16 @@ describe('Candy routes', () => {
       .put(`/api/v1/candies/${laffyTaffy.id}`)
       .send(laffyTaffy);
 
-    console.log(laffyTaffy);
-
     expect(res.body).toEqual(laffyTaffy);
+  });
+
+  it('delete a specific candy', async () => {
+    const bigHunk = await Candy.findById(1);
+
+    const res = await request(app)
+      .delete(`/api/v1/candies/${bigHunk.id}`);
+
+    expect(res.body).toEqual(bigHunk);
   });
 
 });
