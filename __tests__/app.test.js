@@ -23,7 +23,7 @@ describe('03_separation-of-concerns routes', () => {
   });
 });
 
-describe('First routes', () => {
+describe('Candy routes', () => {
   beforeEach(() => {
     return setup(pool);
   });
