@@ -66,6 +66,8 @@ describe('Candy routes', () => {
       .put(`/api/v1/candies/${laffyTaffy.id}`)
       .send(laffyTaffy);
 
+    console.log(laffyTaffy);
+
     expect(res.body).toEqual(laffyTaffy);
   });
 
