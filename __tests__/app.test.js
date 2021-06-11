@@ -78,4 +78,34 @@ describe('Candy routes', () => {
     expect(res.body).toEqual(bigHunk);
   });
 
+  it('lists all candy', async () => {
+    const lifesaver = await Candy.insert({
+      name: 'lifesavers',
+      texture: 'hard',
+      size: 'small'
+    });
+
+    const gummyBears = await Candy.insert({
+      name: 'gummy bears',
+      texture: 'gummy',
+      size: 'tiny'
+    });
+
+    const pixieStix = await Candy.insert({
+      name: 'pixie stix',
+      texture: 'powder',
+      size: 'small'
+    });
+
+    const laffyTaffy = {
+      name: 'Laffy Taffy',
+      texture: 'chewy',
+      size: 'medium'
+    };
+
+    const res = await request(app).get('/api/v1/candies');
+
+    expect(res.body).toEqual([laffyTaffy, lifesaver, gummyBears, pixieStix]);
+  });
+
 });
