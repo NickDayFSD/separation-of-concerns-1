@@ -97,11 +97,7 @@ describe('Candy routes', () => {
       size: 'small'
     });
 
-    const laffyTaffy = {
-      name: 'Laffy Taffy',
-      texture: 'chewy',
-      size: 'medium'
-    };
+    const laffyTaffy = await Candy.findById(2);
 
     const res = await request(app).get('/api/v1/candies');
 
