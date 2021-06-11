@@ -25,7 +25,7 @@ describe('03_separation-of-concerns routes', () => {
 });
 
 describe('Candy routes', () => {
-  beforeEach(() => {
+  beforeAll(() => {
     return setup(pool);
   });
 
@@ -55,6 +55,18 @@ describe('Candy routes', () => {
       .get(`/api/v1/candies/${candy.id}`);
 
     expect(res.body).toEqual(candy);
+  });
+
+  it('updates a specific candy', async () => {
+    const laffyTaffy = await Candy.findById(2);
+
+    laffyTaffy.size = 'medium';
+
+    const res = await request(app)
+      .put(`/api/v1/candies/${laffyTaffy.id}`)
+      .send(laffyTaffy);
+
+    expect(res.body).toEqual(laffyTaffy);
   });
 
 });
