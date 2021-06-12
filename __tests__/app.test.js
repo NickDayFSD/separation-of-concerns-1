@@ -4,6 +4,7 @@ const setup = require('../data/setup');
 const request = require('supertest');
 const app = require('../lib/app');
 const Candy = require('../lib/models/Candy');
+const Bicycle = require('../lib/models/Bicycle');
 
 describe('03_separation-of-concerns routes', () => {
   beforeEach(() => {
@@ -124,6 +125,24 @@ describe('Bicycle routes', () => {
       .send({ brand: 'cannondale', type: 'road', material: 'aluminum' });
     
     expect(res.body).toEqual(expectation);
+  });
+
+  it('gets all bicycles from our database', async () => {
+    const waterford = await Bicycle.insert({
+      brand: 'waterford',
+      type: 'road',
+      material: 'steel'
+    });
+
+    const fuji = await Bicycle.insert({
+      brand: 'fuji',
+      type: 'road',
+      material: 'aluminum'
+    });
+
+    const res = await request(app).get('/api/v1/bicycles');
+
+    expect(res.body).toEqual([cannondale, waterford, fuji]);
   });
 
 });
