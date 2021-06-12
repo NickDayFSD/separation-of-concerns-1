@@ -105,3 +105,25 @@ describe('Candy routes', () => {
   });
 
 });
+
+describe('Bicycle routes', () => {
+  beforeAll(() => {
+    return setup(pool);
+  });
+
+  it('creates a new bicycle in our database', async () => {
+    const expectation = {
+      id: '1',
+      brand: 'cannondale',
+      type: 'road',
+      material: 'aluminum'
+    };
+
+    const res = await request(app)
+      .post('/api/v1/bicycles')
+      .send({ brand: 'cannondale', type: 'road', material: 'aluminum' });
+    
+    expect(res.body).toEqual(expectation);
+  });
+
+});
