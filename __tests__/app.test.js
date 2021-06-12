@@ -172,4 +172,13 @@ describe('Bicycle routes', () => {
     expect(res.body).toEqual(cannondale);
   });
 
+  it('delete a specific bicycle', async () => {
+    const waterford = await Bicycle.findById(2);
+
+    const res = await request(app)
+      .delete(`/api/v1/bicycles/${waterford.id}`);
+
+    expect(res.body).toEqual(waterford);
+  });
+
 });
