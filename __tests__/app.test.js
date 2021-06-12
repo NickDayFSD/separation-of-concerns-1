@@ -140,9 +140,11 @@ describe('Bicycle routes', () => {
       material: 'aluminum'
     });
 
+    const cannondale = await Bicycle.findById(1);
+
     const res = await request(app).get('/api/v1/bicycles');
 
-    expect(res.body).toEqual([waterford, fuji]);
+    expect(res.body).toEqual([cannondale, waterford, fuji]);
   });
 
   it('finds a specific bicycle from our database', async () => {
