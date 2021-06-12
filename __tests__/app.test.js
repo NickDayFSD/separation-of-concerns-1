@@ -160,4 +160,16 @@ describe('Bicycle routes', () => {
     expect(res.body).toEqual(bicycle);
   });
 
+  it('updates a specific bicycle', async () => {
+    const cannondale = await Bicycle.findById(1);
+
+    cannondale.material = 'aluminum with carbon forks';
+
+    const res = await request(app)
+      .put(`/api/v1/bicycles/${cannondale.id}`)
+      .send(cannondale);
+
+    expect(res.body).toEqual(cannondale);
+  });
+
 });
