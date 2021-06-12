@@ -142,7 +142,7 @@ describe('Bicycle routes', () => {
 
     const res = await request(app).get('/api/v1/bicycles');
 
-    expect(res.body).toEqual([cannondale, waterford, fuji]);
+    expect(res.body).toEqual([waterford, fuji]);
   });
 
 });
