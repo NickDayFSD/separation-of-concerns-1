@@ -145,4 +145,17 @@ describe('Bicycle routes', () => {
     expect(res.body).toEqual([waterford, fuji]);
   });
 
+  it('finds a specific bicycle from our database', async () => {
+    const bicycle = await Bicycle.insert({
+      brand: 'kona',
+      type: 'road',
+      material: 'steel'
+    });
+
+    const res = await request(app)
+      .get(`/api/v1/bicycles/${bicycle.id}`);
+
+    expect(res.body).toEqual(bicycle);
+  });
+
 });
