@@ -6,6 +6,7 @@ const app = require('../lib/app');
 const Candy = require('../lib/models/Candy');
 const Bicycle = require('../lib/models/Bicycle');
 const Color = require('../lib/models/Color');
+const Anime = require('../lib/models/Anime');
 
 describe('03_separation-of-concerns routes', () => {
   beforeEach(() => {
@@ -210,7 +211,7 @@ describe('color routes', () => {
     const res = await request(app)
       .get(`/api/v1/colors/${color.id}`);
     
-    expect (res.body).toEqual(color);
+    expect(res.body).toEqual(color);
   });
 
   it('gets all colors in our database', async () =>  {
@@ -266,5 +267,17 @@ describe('anime routes', () => {
       .send({ title: 'Hunter X Hunter', episodes: 148 });
 
     expect(res.body).toEqual(expectation);
+  });
+
+  it('finds a specific anime from our database', async () => {
+    const katanagatari = await Anime.insert({
+      title: 'Katanagatari',
+      episodes: 12
+    });
+
+    const res = await request(app)
+      .get(`/api/v1/anime/${katanagatari.id}`);
+
+    expect(res.body).toEqual(katanagatari);
   });
 });
