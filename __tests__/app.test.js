@@ -280,4 +280,16 @@ describe('anime routes', () => {
 
     expect(res.body).toEqual(katanagatari);
   });
+
+  it('gets all anime in our database', async () => {
+    const hunter = await Anime.findById(1);
+    const kg = await Anime.findById(2);
+
+    const onePiece = await Anime.insert({ title: 'One Piece', episodes: 920 });
+    const onePunch = await Anime.insert({ title: 'One Punch Man', episodes: 24 });
+
+    const res = await request(app).get('/api/v1/anime');
+
+    expect(res.body).toEqual([hunter, kg, onePiece, onePunch]);
+  });
 });
