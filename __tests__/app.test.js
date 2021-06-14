@@ -217,10 +217,10 @@ describe('color routes', () => {
     const red = await Color.findById(1);
     const orange = await Color.findById(2);
 
-    const yellow = await Color.insert({ color: yellow });
-    const green = await Color.insert({ color: green });
-    const blue = await Color.insert({ color: blue });
-    const purple = await Color.insert({ color: purple });
+    const yellow = await Color.insert({ color: 'yellow' });
+    const green = await Color.insert({ color: 'green' });
+    const blue = await Color.insert({ color: 'blue' });
+    const purple = await Color.insert({ color: 'purple' });
 
     const res = await request(app).get('/api/v1/colors');
 
