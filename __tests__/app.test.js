@@ -304,4 +304,13 @@ describe('anime routes', () => {
 
     expect(res.body).toEqual(onePiece);
   });
+
+  it('deletes a specific anime', async () => {
+    const anime = await Anime.findById(3);
+
+    const res = await request(app)
+      .delete(`/api/v1/anime/${anime.id}`);
+
+    expect(res.body).toEqual(anime);
+  });
 });
