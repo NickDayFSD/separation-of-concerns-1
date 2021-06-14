@@ -5,6 +5,7 @@ const request = require('supertest');
 const app = require('../lib/app');
 const Candy = require('../lib/models/Candy');
 const Bicycle = require('../lib/models/Bicycle');
+const Color = require('../lib/models/Color');
 
 describe('03_separation-of-concerns routes', () => {
   beforeEach(() => {
@@ -199,5 +200,16 @@ describe('color routes', () => {
       .send({ color: 'red' });
 
     expect(res.body).toEqual(expectation);
+  });
+
+  it('finds a specific color in our database', async () => {
+    const color = await Color.insert({
+      color: 'orange'
+    });
+
+    const res = await request(app)
+      .get(`/api/v1/colors/${color.id}`);
+    
+    expect (res.body).toEqual(color);
   });
 });
