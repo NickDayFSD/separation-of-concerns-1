@@ -292,4 +292,16 @@ describe('anime routes', () => {
 
     expect(res.body).toEqual([hunter, kg, onePiece, onePunch]);
   });
+  
+  it('updates a specific anime', async () => {
+    const onePiece = await Anime.findById(3);
+
+    onePiece.episodes = 978;
+
+    const res = await request(app)
+      .put(`/api/v1/anime/${onePiece.id}`)
+      .send(onePiece);
+
+    expect(res.body).toEqual(onePiece);
+  });
 });
