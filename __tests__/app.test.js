@@ -248,3 +248,23 @@ describe('color routes', () => {
     expect(res.body).toEqual(blue);
   });
 });
+
+describe('anime routes', () => {
+  beforeAll(() => {
+    return setup(pool);
+  });
+
+  it('creates a new anime in our database', async () => {
+    const expectation = {
+      id: '1',
+      title: 'Hunter X Hunter',
+      episodes: 148
+    };
+
+    const res = await request(app)
+      .post('/api/v1/anime')
+      .send({ title: 'Hunter X Hunter', episodes: 148 });
+
+    expect(res.body).toEqual(expectation);
+  });
+});
