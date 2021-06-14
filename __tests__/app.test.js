@@ -238,4 +238,13 @@ describe('color routes', () => {
 
     expect(res.body).toEqual(purple);
   });
+
+  it('deletes a specific color', async () => {
+    const blue = await Color.findById(5);
+
+    const res = await request(app)
+      .delete(`/api/v1/colors/${blue.id}`);
+
+    expect(res.body).toEqual(blue);
+  });
 });
