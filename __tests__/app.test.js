@@ -182,3 +182,22 @@ describe('Bicycle routes', () => {
   });
 
 });
+
+describe('color routes', () => {
+  beforeAll(() => {
+    return setup(pool);
+  });
+
+  it('creates a new color in our database', async () => {
+    const expectation = {
+      id: '1',
+      color: 'red'
+    };
+
+    const res = await request(app)
+      .post('/api/v1/colors')
+      .send({ color: 'red' });
+
+    expect(res.body).toEqual(expectation);
+  });
+});
