@@ -226,4 +226,16 @@ describe('color routes', () => {
 
     expect(res.body).toEqual([red, orange, yellow, green, blue, purple]);
   });
+
+  it('updates a specific color', async () => {
+    const purple = await Color.findById(6);
+
+    purple.color = 'violet';
+
+    const res = await request(app)
+      .put(`/api/v1/colors/${purple.id}`)
+      .send(purple);
+
+    expect(res.body).toEqual(purple);
+  });
 });
